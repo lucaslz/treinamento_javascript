@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Curso JavaScript</title>
+    </head>
+    <body>
+        <div id="app">
+            <button id="add-button">Add Squad</button>
+            <div id="squads"></div>
+        </div>
+        <script>
+            //Pegando referencia do botao
+            var addButon = document.querySelector("#add-button");
+
+            //Funcao que cria um novo quadrado
+            function createElementSquad() {
+                var elementSquad = document.createElement('div');
+                var squads = document.querySelector("#squads");
+
+                var id = "element-" + squads.childElementCount;
+
+                elementSquad.style.width = '100px';
+                elementSquad.style.height = '100px';
+                elementSquad.style.backgroundColor = '#FF0000';
+                elementSquad.id = id
+                elementSquad.setAttribute('onmouseover', `getRandomColor('${id}')`);
+
+                squads.appendChild(elementSquad);
+            };
+
+
+            //Gera uma nova cor
+            function getRandomColor(id) {
+                var letters = "0123456789ABCDEF";
+                
+                var color = "#";
+                
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+
+                //Buscando elemento e alterando cor
+                var element = document.querySelector(`#${id}`);
+                element.style.backgroundColor = color;
+            };
+
+            //Escuta o evento de on click no botao
+            addButon.addEventListener('click', createElementSquad);
+        </script>
+    </body>
+</html>
